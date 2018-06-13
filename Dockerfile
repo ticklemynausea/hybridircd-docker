@@ -1,6 +1,7 @@
 FROM alpine:3.7
 
 ENV HYBRID_VERSION 8.2.24
+ENV DATADIR /hybrid-data
 
 ARG CONFIGURE_FLAGS="--prefix=/opt/hybrid --enable-epoll --enable-openssl"
 ARG MAKE_FLAGS=""
@@ -30,5 +31,7 @@ COPY scripts/startup-sequence/* /startup-sequence/
 VOLUME /hybrid-data
 
 EXPOSE 6667 6697
+
+WORKDIR $DATADIR
 
 ENTRYPOINT ["/entrypoint.sh"]
